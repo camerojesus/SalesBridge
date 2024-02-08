@@ -1,6 +1,6 @@
 <template>
-  <v-card width="400" elevation="6" class="menu-lateral">
-    <v-list bg-color="#f2f7f2">
+  <div width="400" elevation="6">
+    <v-list bg-color="#f2f7f2" >
       <template v-for="(option, index) in menuOptions" :key="index">
         <v-list-group v-if="option.subgroups && option.subgroups.length > 0" always-show-expand-icon :value="option.title">
           <template v-slot:activator="{ props }">
@@ -29,7 +29,7 @@
         <v-list-item v-else :prepend-icon="option.icon" :title="option.title" class="v-list-item--link" link></v-list-item>
       </template>
     </v-list>
-  </v-card>
+  </div>
 </template>
 
 
@@ -107,10 +107,9 @@ export default {
 
 <style scoped>
 .menu-lateral {
-  position: fixed;
-  top: 0;
+  top: 100px;
   left: 0;
-  height: 100vh; /* Ajusta la altura para que ocupe toda la ventana visible */
+  height: cal(100%-65px); /* Ajusta la altura para que ocupe toda la ventana visible */
   z-index: 100; /* Asegúrate de que se muestre por encima de otros elementos */
   overflow-y:auto;
   scrollbar-width: none; /* Para Firefox */

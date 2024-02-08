@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-main class="borde d-flex  flex-row justify-start fill-height" >
-          <!-- Asegúrate de que tu componente Login se muestra o se oculta según la lógica de autenticación -->
-          <RouterView />
+    <v-main>
+      <!-- Asegúrate de que tu componente Login se muestra o se oculta según la lógica de autenticación -->
+      <RouterView />
+      <!-- Asegúrate de que RouterView siempre se renderice o basado en la condición correcta -->
     </v-main>
-    <!-- Asegúrate de que RouterView siempre se renderice o basado en la condición correcta -->
   </v-app>
 </template>
 
@@ -17,19 +17,30 @@ export default {
   data() {
     return {
       isAuthenticated: false,
+      nWidth: 0,
+      nHeight: 0,
     };
   },
   components: {
     Login,
   },
+  created() {
+    this.nWidth = window.innerWidth;
+    console.log("Width: ", this.nWidth);
+    this.nHeight = window.innerHeight;
+  },
 };
 </script>
 
 <style scoped>
-  .borde {
-    border: 1px solid grey;
-    width:100vw;
-    padding:0px;
-    margin:0px;
-  }
+.componente {
+  box-sizing: border-box;
+}
+.borde {
+  border: 1px solid grey;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  min-width: 100%;
+}
 </style>
