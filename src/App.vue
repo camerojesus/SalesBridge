@@ -1,18 +1,11 @@
 <template>
   <v-app>
-    <v-main> 
-      <Login></Login>
+    <v-main class="borde d-flex  flex-row justify-start fill-height" >
+          <!-- Asegúrate de que tu componente Login se muestra o se oculta según la lógica de autenticación -->
+          <RouterView />
     </v-main>
+    <!-- Asegúrate de que RouterView siempre se renderice o basado en la condición correcta -->
   </v-app>
-  <header>
-    <div class="wrapper">
-          <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-  <RouterView />
 </template>
 
 <script>
@@ -20,72 +13,23 @@ import { RouterLink, RouterView } from "vue-router";
 import Login from "./components/login.vue";
 
 export default {
-  components: {  
+  name: "App",
+  data() {
+    return {
+      isAuthenticated: false,
+    };
+  },
+  components: {
     Login,
   },
 };
 </script>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  .borde {
+    border: 1px solid grey;
+    width:100vw;
+    padding:0px;
+    margin:0px;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
