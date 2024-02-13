@@ -1,5 +1,4 @@
 <template>
-  <div width="400" elevation="6">
     <v-list bg-color="#f2f7f2" >
       <template v-for="(option, index) in menuOptions" :key="index">
         <v-list-group v-if="option.subgroups && option.subgroups.length > 0" always-show-expand-icon :value="option.title">
@@ -29,7 +28,6 @@
         <v-list-item v-else :prepend-icon="option.icon" :title="option.title" class="v-list-item--link" link></v-list-item>
       </template>
     </v-list>
-  </div>
 </template>
 
 
@@ -106,13 +104,5 @@ export default {
 </script>
 
 <style scoped>
-.menu-lateral {
-  top: 100px;
-  left: 0;
-  height: cal(100%-65px); /* Ajusta la altura para que ocupe toda la ventana visible */
-  z-index: 100; /* Asegúrate de que se muestre por encima de otros elementos */
-  overflow-y:auto;
-  scrollbar-width: none; /* Para Firefox */
-  -ms-overflow-style: none; /* Para Internet Explorer y Edge */  
-}
+
 </style>
