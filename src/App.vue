@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="#2c572a" dark>
+    <v-app-bar app color="#2c572a" dark elevation="20" class="custom-elevation">
       <img
         src="http://gescel.online/assets/salesbridge/logotemporal_001.png"
         alt="Logo"
@@ -20,28 +20,21 @@
     <v-main>
       <!-- Zona principal para los componentes o páginas -->
     </v-main>
-    <v-footer app fixed>
-  <v-container fluid>
-    <!-- Fila superior con el mensaje y los botones de redes sociales -->
-    <v-row class="bg-teal white--text py-2">
-      <v-col cols="12" class="d-flex align-center justify-center">
-        <span class="mr-8">Manténgase en contacto por nuestras redes sociales</span>
-        <div>
-          <v-btn
-            v-for="icon in icons"
-            :key="icon"
-            icon
-            class="mx-2"
-            color="white"
-          >
-            <v-icon :size="20">{{ icon }}</v-icon>
-          </v-btn>
-        </div>
-      </v-col>
-    </v-row>
-  </v-container>
-</v-footer>
-
+    <v-footer app  >
+      <v-container fluid >
+        <!-- Fila superior con el mensaje y los botones de redes sociales -->
+        <v-row class="bg-teal white--text py-2 custom-elevation-footer" style="height:75px;">
+          <v-col cols="12" class="d-flex align-center justify-center">
+            <span class="mr-8">Manténgase en contacto por nuestras redes sociales</span>
+            <div>
+              <v-btn v-for="icon in icons" :key="icon" icon class="mx-2" color="white">
+                <v-icon :size="20">{{ icon }}</v-icon>
+              </v-btn>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-footer>
   </v-app>
 </template>
 
@@ -73,12 +66,18 @@ export default {
 }
 /* Estilos para ocultar la barra de desplazamiento */
 .navigation-drawer-content {
-  height: 100%; /* Asegura que el contenedor ocupe toda la altura disponible */
+  height: 88%; /* Asegura que el contenedor ocupe toda la altura disponible */
   overflow-y: auto; /* Permite el desplazamiento vertical */
   scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
 }
 
 .navigation-drawer-content::-webkit-scrollbar {
   display: none; /* Oculta la barra de desplazamiento en WebKit (Chrome, Safari) */
+}
+.custom-elevation .v-app-bar {
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.23); /* Ajusta estos valores según necesites */
+}
+.custom-elevation-footer {
+  box-shadow: 0 -6px 8px rgba(0, 0, 0, 0.23); /* Ajusta los valores según necesites */
 }
 </style>
