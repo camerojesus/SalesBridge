@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export function cObtenerNombreArchivo(rutaCompleta) {
     const partes = rutaCompleta.split('/');
     const nombreArchivo = partes[partes.length - 1];
@@ -23,13 +25,26 @@ export function sumar(a, b) {
     return a + b;
 }
 
+// Función para cargar empresas desde el servidor
+async function CargarEmpresas() {
+  try {
+    const cURL = import.meta.env.VITE_API_URL;
+    const response = await axios.get(`${cURL}/CargarEmpresas`);
+    return response.data; // Retorna los datos de las empresas
+  } catch (error) {
+    console.error('Error al cargar las empresas:', error);
+    throw error; // Lanza el error para manejarlo en el componente
+  }
+}
+
 const oGescel = {
     cObtenerNombreArchivo,
     funcionConsole,
     cServidor: import.meta.env.VITE_API_URL,
     sanitizeText,
     saludar,
-    sumar
+    sumar,
+    CargarEmpresas
 };
 
 export default oGescel;

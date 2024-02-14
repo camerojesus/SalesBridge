@@ -1,5 +1,5 @@
 <template>
-    <MenuLateralExpandible v-if="true" />  
+  <MenuLateralExpandible v-if="true" />
 </template>
 
 <script>
@@ -20,6 +20,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

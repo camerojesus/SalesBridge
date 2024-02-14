@@ -51,12 +51,11 @@
     <v-navigation-drawer app v-model="drawer" fixed width="400" class="hide-scrollbar">
       <div class="navigation-drawer-content">
         <!-- Contenido del cajón de navegación - Mi menu expandible -->
-        <MenuLateralExpandible />
+        <MenuLateralExpandible @EjecutarMenu="ProcesarMenu" />
       </div>
     </v-navigation-drawer>
-
     <v-main>
-      <!-- Zona principal para los componentes o páginas -->
+      <router-view />
     </v-main>
     <v-footer app>
       <v-container fluid>
@@ -102,8 +101,12 @@ export default {
       } else {
         // Abrir diálogo de inicio de sesión
         console.log("No autenticado")
+        this.$router.push({ path: "/login" });
       }
     },
+    ProcesarMenu(cOpcion) {
+      console.log(cOpcion);
+    }
   },
 };
 </script>

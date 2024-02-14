@@ -3,7 +3,7 @@
       <template v-for="(option, index) in menuOptions" :key="index">
         <v-list-group v-if="option.subgroups && option.subgroups.length > 0" always-show-expand-icon :value="option.title">
           <template v-slot:activator="{ props }">
-            <v-list-item v-bind="props" :prepend-icon="option.icon" :title="option.title" link></v-list-item>
+            <v-list-item v-bind="props" :prepend-icon="option.icon" :title="option.title" link @click="EnviarOpcionMenu(option.title)" ></v-list-item>
           </template>
           <template v-for="(subgroup, sgIndex) in option.subgroups" :key="`sg-${sgIndex}`">
             <!-- Se añade un nuevo v-list-group para manejar subgrupos de segundo nivel -->
@@ -18,10 +18,11 @@
                 :title="subsubgroup.title"
                 :prepend-icon="subsubgroup.icon"
                 link
+                @click="EnviarOpcionMenu(subsubgroup.title)"
               ></v-list-item>
             </v-list-group>
             <!-- Se asegura que los ítems de primer nivel de subgrupos sean clicables agregando la propiedad link -->
-            <v-list-item v-else :title="subgroup.title" :prepend-icon="subgroup.icon" link></v-list-item>
+            <v-list-item v-else :title="subgroup.title" :prepend-icon="subgroup.icon" @click="EnviarOpcionMenu(subgroup.title)" link></v-list-item>
           </template>
         </v-list-group>
         <!-- Se asegura que las opciones principales sin subgrupos sean clicables -->
@@ -41,9 +42,14 @@ export default {
         icon: "mdi-home"
       },
       {
+        title: "Pruebas",
+        icon: "mdi-home"
+      },      
+      {
         title: "Administración",
         icon: "mdi-account-circle",
         subgroups: [
+          { title: "Empresas", icon: "mdi-domain" },
           { title: "Usuarios", icon: "mdi-account-multiple" },
           { title: "Roles", icon: "mdi-account-key" }
         ]
@@ -99,10 +105,16 @@ export default {
       }
       // Aquí podrían añadirse más opciones según se necesite...
     ]
-  })
+  }),
+  methods: {
+    EnviarOpcionMenu(opcion) {      
+      this.$emit("EjecutarMenu",opcion)
+    }
+  }
 };
 </script>
 
 <style scoped>
 
 </style>
+
