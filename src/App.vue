@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app width="100%;">
     <v-app-bar
       app
       color="#2c572a"
@@ -8,11 +8,11 @@
       class="custom-elevation"
       height="85"
     >
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <img
         src="http://gescel.online/assets/salesbridge/logotemporal_001.png"
         alt="Logo"
         style="height: 40px; width: auto; margin-right: 16px"
-        @click="drawer = !drawer"
         class="ml-4 hover-effect"
         id="LogoProyecto"
       />
@@ -20,15 +20,13 @@
       <v-spacer></v-spacer>
 
       <!-- Avatar y botón de login -->
-      <div class="d-flex flex-column justify-center align-center mr-4 hover-effect"  v-on:click="GestionarLogin()">
+      <div
+        class="d-flex flex-column justify-center align-center mr-4 hover-effect"
+        v-on:click="GestionarLogin()"
+      >
         <div class="d-flex flex-column justify-center align-center">
           <v-avatar color="info" size="x-large" class="avatar-hover">
-            <v-img
-              ref="avatarImg"
-              src="../src/assets/images/avatar03.png"
-              alt="John"
-
-            >
+            <v-img ref="avatarImg" src="../src/assets/images/avatar03.png" alt="John">
             </v-img>
           </v-avatar>
         </div>
@@ -48,20 +46,31 @@
       <!-- Avatar y botón de login -->
     </v-app-bar>
 
-    <v-navigation-drawer app v-model="drawer" fixed width="400" class="hide-scrollbar">
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      width="400"
+      class="hide-scrollbar"
+      app
+      :mini-variant="!drawer"
+      :hide-on-desktop="!drawer"
+    >
       <div class="navigation-drawer-content">
         <!-- Contenido del cajón de navegación - Mi menu expandible -->
         <MenuLateralExpandible @EjecutarMenu="ProcesarMenu" />
       </div>
     </v-navigation-drawer>
-    <v-main>
+    <v-main
+      :style="{ width: cWidthVMain }"
+      class="d-flex flex-row justify-start"      
+    >
       <router-view />
     </v-main>
     <v-footer app>
       <v-container fluid>
         <!-- Fila superior con el mensaje y los botones de redes sociales -->
         <v-row
-          class="bg-teal white--text py-2 custom-elevation-footer"
+          class="bg-custom white--text py-2 custom-elevation-footer"
           style="height: 75px"
         >
           <v-col cols="12" class="d-flex align-center justify-center">
@@ -92,21 +101,53 @@ export default {
     drawer: null,
     icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"],
     bAutenticado: false,
+    cWidthVMain: "1000px",
   }),
   methods: {
     GestionarLogin() {
       if (this.bAutenticado) {
         // Cerrar sesión
-        console.log("Autenticado")
+        console.log("Autenticado");
       } else {
         // Abrir diálogo de inicio de sesión
-        console.log("No autenticado")
+        console.log("No autenticado");
         this.$router.push({ path: "/login" });
       }
     },
-    ProcesarMenu(cOpcion) {
-      console.log(cOpcion);
-    }
+    ProcesarMenu(aOpcion) {
+      if(aOpcion.ruta){
+        console.log("Ruta: " + aOpcion.ruta);
+        this.$router.push({ path: aOpcion.ruta });
+      }
+      else  console.log("sin ruta ",aOpcion);      
+    },
+
+    CapturarTamaño() {
+      this.nWidth = window.innerWidth;
+      this.nHeight = window.innerHeight;
+      console.log("Ancho: " + this.nWidth + " Alto: " + this.nHeight);
+    },
+  },
+
+  watch: {
+    drawer: function (val) {
+      if (val) {
+        this.cWidthVMain = this.nWidth - 64 - 400 + "px";
+        console.log(this.cWidthVMain);
+      } else {
+        this.cWidthVMain = this.nWidth - 64 + "px";
+        console.log(this.cWidthVMain);
+      }
+    },
+  },
+  created() {
+    this.CapturarTamaño();
+    window.addEventListener("resize", () => {
+      this.CapturarTamaño();
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
 };
 </script>
@@ -140,5 +181,9 @@ export default {
 .hover-effect:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+.bg-custom {
+  background-color: #4737a5; /* Tu color personalizado */
+  color: white; /* Asegurándose de que el texto tenga contraste y sea legible */
 }
 </style>

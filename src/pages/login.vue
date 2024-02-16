@@ -123,7 +123,7 @@ export default {
     bValidarLogin() {
       if (this.cLogin === "" || this.cPassword === "") {
         this.cMensajeNotificacion = "Debe ingresar un login y password";
-        this.cColorNotificacion = "#e6726a";
+        this.cColorNotificacion = "#FA008F";
         this.bNotificacion = true;
         return false;
       }
@@ -151,23 +151,23 @@ export default {
             "Authorization"
           ] = `Bearer ${response.data.token}`;
           // Redirigir al usuario a otra página
-          this.loginStatus = "fallido";
-          this.cMensajeNotificacion = "Login o password equivocados, vuelta a intentar";
-          this.cColorNotificacion = "#e6726a";
+          this.loginStatus = "exitoso";
+          this.cMensajeNotificacion = "Bienvenido";
+          this.cColorNotificacion = "#3CA537";
           this.bNotificacion = true;
           this.$router.push({ name: "home" });
         } else {
           // solicitud exitosa SIN TOKEN (igualmente no autenticado)
           this.loginStatus = "fallido";
           this.cMensajeNotificacion = "Login o password equivocados, vuelta a intentar";
-          this.cColorNotificacion = "#e6726a";
+          this.cColorNotificacion = "#FA008F";
           this.bNotificacion = true;
         }
       } catch (error) {
         // CUALQUIER ERROR - INCLUYENDO ERRORES DE RED Y ERROR DE CREDENCIALES
         if (error.response.status === 401) {
           this.cMensajeNotificacion = "Login o password equivocados, vuelta a intentar";
-          this.cColorNotificacion = "#e6726a";
+          this.cColorNotificacion = "#FA008F";
           this.bNotificacion = true;
         } else {
           this.cMensajeNotificacion = "Error en la comunicación con el servidor";
@@ -211,5 +211,6 @@ h3 {
   justify-content: center;
   align-items: center;
   min-height: 90%; /* Asegura que el contenedor tenga al menos la altura de la pantalla */
+  width:100%;
 }
 </style>

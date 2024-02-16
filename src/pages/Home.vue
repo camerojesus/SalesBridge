@@ -1,5 +1,4 @@
 <template>
-  <MenuLateralExpandible v-if="true" />
 </template>
 
 <script>

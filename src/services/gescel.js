@@ -44,7 +44,7 @@ const oGescel = {
     sanitizeText,
     saludar,
     sumar,
-    CargarEmpresas
+    CargarEmpresas,    
 };
 
 export default oGescel;
